@@ -1,0 +1,9 @@
+Install process for USB TTL to RS232 PL2303 (based) Converter Serial Cable module
+https://www.surplustronics.co.nz/products/7682-usb-ttl-to-rs232-pl2303-converter-serial-cable-module-
+
+#check assignment
+sudo dmesg | grep tty
+
+#assign driver
+sudo modprobe usbserial vendor=0x067b product=0x2303
+sudo chmod 666 /dev/ttyUSB0  (if assigned to USB0)

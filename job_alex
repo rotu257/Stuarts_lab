@@ -1,0 +1,13 @@
+#!/bin/bash
+
+i=1
+
+for freq in $(seq 79000000 100000 81000000)
+do 
+
+echo $freq
+
+set_agilentE8244A -f $freq
+
+
+done
