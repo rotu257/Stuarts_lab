@@ -1,0 +1,14 @@
+#!/bin/bash
+
+i=1
+
+for volts in $(seq 1 1 60)
+do 
+
+echo $volts
+
+#get_lecroy 4 -o $i
+sleep 60
+
+i=$(($i+1))
+done

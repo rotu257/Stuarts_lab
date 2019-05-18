@@ -1,0 +1,20 @@
+#!/bin/bash
+
+i=1
+
+for volts in $(seq 26.1 0.1 50)
+do 
+
+echo $volts
+
+
+# to set the vqlue of the piezo of the TLB
+TLB_6700 -p $volts
+
+# TLB_6700 -c SOURce:VOLTage:PIEZo?
+
+# to get the data from the OSA
+# get_YOKO -i 169.254.166.208 -o $i
+
+i=$(($i+1))
+done

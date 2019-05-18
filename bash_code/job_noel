@@ -1,0 +1,25 @@
+#!/bin/bash
+
+i=1
+VAR=$(TLB_6700 -c SOURce:VOLTage:PIEZo? | tr -dc '0-9')
+VAR=$(($VAR/100))
+echo $VAR
+
+
+for volts in $(seq 26.62 0.1 50)
+do 
+
+echo $volts
+
+
+# to set the vqlue of the piezo of the TLB
+TLB_6700 -p $volts
+
+# to get the data from the OSA
+get_YOKO -i 169.254.166.208 -o $i
+
+# to plot the data quickly
+quick_plot.py -s -o $i
+
+i=$(($i+1))
+done

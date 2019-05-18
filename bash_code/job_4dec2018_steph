@@ -1,0 +1,59 @@
+#!/bin/bash
+
+i=1
+
+set_PIDSRS -i 3 -a
+set_PIDSRS -i 5 -a
+
+for volts in $(seq 0.280 0.002 0.400)
+do 
+echo $volts
+
+# Set PID value
+# set_PIDSRS -i 3 -a
+# set_PIDSRS -i 5 -a
+# sleep 0.1
+
+set_PIDSRS -i 3 -s $volts
+sleep 0.1
+set_TTITGF3162 -c 'CHNTRG TWO'
+
+# Stopping scopes
+get_TDS5104B -c 'ACQUIRE:STATE OFF'
+get_DSO54853A -c ':STOP'
+
+# Get all the data
+get_TDS5104B -o $i\_FW 1,2,3,4
+get_DSO54853A -o $i\_FW 1,2,3,4
+get_DSA -o $i\_FW 1,2,3,4
+
+i=$(($i+1))
+done
+
+set_PIDSRS -i 3 -a
+set_PIDSRS -i 5 -a
+
+for volts in $(seq 0.398 -0.002 0.280)
+do 
+echo $volts
+
+# Set PID value
+# set_PIDSRS -i 3 -a
+# set_PIDSRS -i 5 -a
+# sleep 0.1
+
+set_PIDSRS -i 3 -s $volts
+sleep 0.1
+set_TTITGF3162 -c 'CHNTRG TWO'
+
+# Stopping scopes
+get_TDS5104B -c 'ACQUIRE:STATE OFF'
+get_DSO54853A -c ':STOP'
+
+# Get all the data
+get_TDS5104B -o $i\_BK 1,2,3,4
+get_DSO54853A -o $i\_BK 1,2,3,4
+get_DSA -o $i\_BK 1,2,3,4
+
+i=$(($i+1))
+done

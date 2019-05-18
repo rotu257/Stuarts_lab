@@ -1,0 +1,13 @@
+#!/bin/bash
+
+i=1
+
+for volts in $(seq 0 1 1000)
+do 
+
+echo $volts
+
+get_DSA 1 -o $i
+
+i=$(($i+1))
+done
